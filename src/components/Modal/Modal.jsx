@@ -1,6 +1,6 @@
-export default function Modal() {
+export default function Modal({ dispatch }) {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[rgba(0,0,0,0.4)]">
+    <div className="flex items-center justify-center fixed w-full top-0 left-0 min-h-screen bg-[rgba(0,0,0,0.4)]">
       <form className="bg-gray-700 p-10 w-[900px]">
         <h1 className="font-bold text-white text-4xl">Add fields</h1>
         <div className="relative z-0 w-full mb-5 group">
@@ -54,7 +54,12 @@ export default function Modal() {
         </div>
 
         <div className="flex items-center gap-3">
-          <button className="text-white rounded p-2 bg-red-600">cancel</button>
+          <button
+            className="text-white rounded p-2 bg-red-600"
+            onClick={() => dispatch({ type: "HANDLE_CANCEL" })}
+          >
+            cancel
+          </button>
           <button className="text-white rounded p-2 bg-blue-600" type="submit">
             submit
           </button>
