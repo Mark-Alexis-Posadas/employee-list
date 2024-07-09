@@ -15,6 +15,7 @@ const initialState = {
   email: "",
   isToggleModal: false,
   submittedData: [],
+  editIndex: null,
 };
 
 //reducer function
@@ -25,7 +26,18 @@ const reducer = (state, action) => {
     case "HANDLE_FIELD_CHANGE":
       return { ...state, [action.field]: action.value };
     case "HANDLE_EDIT":
-      return { ...state, isToggleModal: true };
+      const editIdx = action.index;
+      const editedData = state.submittedData[editIdx];
+      console.log(editIdx, editedData);
+      return {
+        ...state,
+        isToggleModal: true,
+        firstName: editedData.firstName,
+        middleName: editedData.middleName,
+        lastName: editedData.lastName,
+        email: editedData.email,
+        editIndex: editIdx,
+      };
     case "HANDLE_DELETE":
       const idx = action.index;
       return {
@@ -53,7 +65,6 @@ export default function EmployeeList() {
 
   const handleFieldChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     dispatch({ type: "HANDLE_FIELD_CHANGE", field: name, value: value });
   };
 

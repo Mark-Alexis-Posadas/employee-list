@@ -13,7 +13,7 @@ export default function EmployeeItem({
         scope="row"
         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
       >
-        1
+        {index}
       </th>
       <td className="px-6 py-4">{employee.firstName}</td>
       <td className="px-6 py-4">{employee.middleName}</td>
@@ -23,7 +23,7 @@ export default function EmployeeItem({
         <div className="flex items-center gap-3">
           <button
             className="flex items-center gap-2 font-medium text-blue-600 dark:text-blue-500 hover:underline"
-            onClick={() => dispatch({ type: "HANDLE_EDIT" })}
+            onClick={() => dispatch({ type: "HANDLE_EDIT", index: index })}
           >
             Edit
             <FontAwesomeIcon icon={faPencilAlt} />
