@@ -1,6 +1,7 @@
-import React from "react";
+import { faPencilAlt, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function EmployeeItem({ dispatch }) {
+export default function EmployeeItem({ dispatch, employee }) {
   return (
     <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
       <th
@@ -9,20 +10,22 @@ export default function EmployeeItem({ dispatch }) {
       >
         1
       </th>
-      <td className="px-6 py-4">mark alexis</td>
-      <td className="px-6 py-4">petrola</td>
-      <td className="px-6 py-4">posadas</td>
-      <td className="px-6 py-4">markalexisposadas@gmail.com</td>
+      <td className="px-6 py-4">{employee.firstName}</td>
+      <td className="px-6 py-4">{employee.middleName}</td>
+      <td className="px-6 py-4">{employee.lastName}</td>
+      <td className="px-6 py-4">{employee.email}</td>
       <td className="px-6 py-4">
         <div className="flex items-center gap-3">
           <button
-            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+            className="flex items-center gap-2 font-medium text-blue-600 dark:text-blue-500 hover:underline"
             onClick={() => dispatch({ type: "HANDLE_EDIT" })}
           >
             Edit
+            <FontAwesomeIcon icon={faPencilAlt} />
           </button>
-          <button className="font-medium text-red-600 dark:text-red-500 hover:underline">
+          <button className="flex items-center gap-2 font-medium text-red-600 dark:text-red-500 hover:underline">
             Delete
+            <FontAwesomeIcon icon={faTrashAlt} />
           </button>
         </div>
       </td>

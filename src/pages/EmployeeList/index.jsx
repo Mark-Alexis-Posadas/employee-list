@@ -4,6 +4,8 @@ import EmployeeItem from "../../components/EmployeeItem";
 import { TABLE_HEADER_TEXT } from "../../data";
 import Modal from "../../components/Modal/Modal";
 import { useReducer } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 //initial state
 const initialState = {
@@ -12,6 +14,7 @@ const initialState = {
   lastName: "",
   email: "",
   isToggleModal: false,
+  submittedData: [],
 };
 
 //reducer function
@@ -20,12 +23,21 @@ const reducer = (state, action) => {
     case "HANDLE_ADD_EMPLOYEE":
       return { ...state, isToggleModal: true };
     case "HANDLE_FIELD_CHANGE":
-      const { name, value } = action.payload;
-      return { ...state, [name]: value };
+      return { ...state, [action.field]: action.value };
     case "HANDLE_EDIT":
       return { ...state, isToggleModal: true };
     case "HANDLE_CANCEL":
       return { ...state, isToggleModal: false };
+
+    case "HANDLE_SUBMIT":
+      return {
+        ...state,
+        submittedData: [...state.submittedData, { ...state }],
+        firstName: "",
+        lastName: "",
+        email: "",
+        isToggle: false,
+      };
   }
 };
 
@@ -33,15 +45,23 @@ export default function EmployeeList() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleFieldChange = (e) => {
-    dispatch({ type: "HANDLE_FIELD_CHANGE", payload: e.target.value });
+    const { name, value } = e.target;
+    dispatch({ type: "HANDLE_FIELD_CHANGE", field: name, value: value });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch({ type: "HANDLE_SUBMIT" });
+  };
+
   return (
-    <div className="p-10">
+    <div className="p-10 bg-black min-h-screen overflow-hidden">
       <button
-        className="text-gray-400 p-2 rounded bg-gray-800 mb-5"
+        className="text-gray-400 p-2 rounded bg-gray-800 mb-5 flex items-center gap-3"
         onClick={() => dispatch({ type: "HANDLE_ADD_EMPLOYEE" })}
       >
         Add employee
+        <FontAwesomeIcon icon={faPlusCircle} />
       </button>
       <div className="relative overflow-x-auto shadow-md">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -51,7 +71,13 @@ export default function EmployeeList() {
             </tr>
           </thead>
           <tbody>
-            <EmployeeItem dispatch={dispatch} />
+            {state.submittedData.length === 0 ? (
+              <p className="text-white">no employee left</p>
+            ) : (
+              state.submittedData.map((item, index) => (
+                <EmployeeItem key={index} employee={item} dispatch={dispatch} />
+              ))
+            )}
           </tbody>
         </table>
       </div>
@@ -60,10 +86,8 @@ export default function EmployeeList() {
         <Modal
           dispatch={dispatch}
           handleFieldChange={handleFieldChange}
-          firstName={state.firstName}
-          middleNameName={state.middleNameName}
-          lastName={state.lastName}
-          email={state.email}
+          handleSubmit={handleSubmit}
+          state={state}
         />
       )}
     </div>
