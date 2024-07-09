@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function EmployeeItem() {
+export default function EmployeeItem({ dispatch }) {
   return (
     <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
       <th
@@ -15,18 +15,15 @@ export default function EmployeeItem() {
       <td className="px-6 py-4">markalexisposadas@gmail.com</td>
       <td className="px-6 py-4">
         <div className="flex items-center gap-3">
-          <a
-            href="#"
+          <button
             className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+            onClick={() => dispatch({ type: "HANDLE_EDIT" })}
           >
             Edit
-          </a>
-          <a
-            href="#"
-            className="font-medium text-red-600 dark:text-red-500 hover:underline"
-          >
+          </button>
+          <button className="font-medium text-red-600 dark:text-red-500 hover:underline">
             Delete
-          </a>
+          </button>
         </div>
       </td>
     </tr>

@@ -10,7 +10,7 @@ const initialState = {
   firstName: "",
   middleName: "",
   lastName: "",
-  userName: "",
+  email: "",
   isToggleModal: false,
 };
 
@@ -22,6 +22,8 @@ const reducer = (state, action) => {
     case "HANDLE_FIELD_CHANGE":
       const { name, value } = action.payload;
       return { ...state, [name]: value };
+    case "HANDLE_EDIT":
+      return { ...state, isToggleModal: true };
     case "HANDLE_CANCEL":
       return { ...state, isToggleModal: false };
   }
@@ -49,13 +51,20 @@ export default function EmployeeList() {
             </tr>
           </thead>
           <tbody>
-            <EmployeeItem />
+            <EmployeeItem dispatch={dispatch} />
           </tbody>
         </table>
       </div>
 
       {state.isToggleModal && (
-        <Modal dispatch={dispatch} handleFieldChange={handleFieldChange} />
+        <Modal
+          dispatch={dispatch}
+          handleFieldChange={handleFieldChange}
+          firstName={state.firstName}
+          middleNameName={state.middleNameName}
+          lastName={state.lastName}
+          email={state.email}
+        />
       )}
     </div>
   );
