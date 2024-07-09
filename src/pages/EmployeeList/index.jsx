@@ -7,7 +7,10 @@ import { useReducer } from "react";
 
 //initial state
 const initialState = {
-  inputValue: "",
+  firstName: "",
+  middleName: "",
+  lastName: "",
+  userName: "",
   isToggleModal: false,
 };
 
@@ -16,12 +19,20 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "HANDLE_ADD_EMPLOYEE":
       return { ...state, isToggleModal: true };
+    case "HANDLE_FIELD_CHANGE":
+      const { name, value } = action.payload;
+      return { ...state, [name]: value };
     case "HANDLE_CANCEL":
       return { ...state, isToggleModal: false };
   }
 };
+
 export default function EmployeeList() {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const handleFieldChange = (e) => {
+    dispatch({ type: "HANDLE_FIELD_CHANGE", payload: e.target.value });
+  };
   return (
     <div className="p-10">
       <button
@@ -43,7 +54,9 @@ export default function EmployeeList() {
         </table>
       </div>
 
-      {state.isToggleModal && <Modal dispatch={dispatch} />}
+      {state.isToggleModal && (
+        <Modal dispatch={dispatch} handleFieldChange={handleFieldChange} />
+      )}
     </div>
   );
 }
