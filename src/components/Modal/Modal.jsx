@@ -1,3 +1,9 @@
+import {
+  faCircleXmark,
+  faPaperPlane,
+  faPlane,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function Modal({
   dispatch,
   handleFieldChange,
@@ -77,13 +83,18 @@ export default function Modal({
 
         <div className="flex items-center gap-3">
           <button
-            className="text-white rounded p-2 bg-red-600"
+            className="text-white rounded p-2 bg-red-600 flex items-center gap-2"
             onClick={() => dispatch({ type: "HANDLE_CANCEL" })}
           >
             cancel
+            <FontAwesomeIcon icon={faCircleXmark} />
           </button>
-          <button className="text-white rounded p-2 bg-blue-600" type="submit">
+          <button
+            className="text-white rounded p-2 bg-blue-600 flex items-center gap-2"
+            type="submit"
+          >
             submit
+            <FontAwesomeIcon icon={faPaperPlane} />
           </button>
         </div>
       </form>
