@@ -34,9 +34,10 @@ const reducer = (state, action) => {
         ...state,
         submittedData: [...state.submittedData, { ...state }],
         firstName: "",
+        middleName: "",
         lastName: "",
         email: "",
-        isToggle: false,
+        isToggleModal: false,
       };
   }
 };
@@ -46,6 +47,7 @@ export default function EmployeeList() {
 
   const handleFieldChange = (e) => {
     const { name, value } = e.target;
+    console.log(name, value);
     dispatch({ type: "HANDLE_FIELD_CHANGE", field: name, value: value });
   };
 
@@ -71,13 +73,9 @@ export default function EmployeeList() {
             </tr>
           </thead>
           <tbody>
-            {state.submittedData.length === 0 ? (
-              <p className="text-white">no employee left</p>
-            ) : (
-              state.submittedData.map((item, index) => (
-                <EmployeeItem key={index} employee={item} dispatch={dispatch} />
-              ))
-            )}
+            {state.submittedData.map((item, index) => (
+              <EmployeeItem key={index} employee={item} dispatch={dispatch} />
+            ))}
           </tbody>
         </table>
       </div>

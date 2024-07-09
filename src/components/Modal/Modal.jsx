@@ -1,8 +1,4 @@
-import {
-  faCircleXmark,
-  faPaperPlane,
-  faPlane,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCircleXmark, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function Modal({
   dispatch,
@@ -19,7 +15,7 @@ export default function Modal({
             value={state.firstName}
             onChange={handleFieldChange}
             type="text"
-            name="first_name"
+            name="firstName"
             id="first_name"
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           />
@@ -35,7 +31,7 @@ export default function Modal({
             value={state.middleName}
             onChange={handleFieldChange}
             type="text"
-            name="middle_name"
+            name="middleName"
             id="middle_name"
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           />
@@ -52,7 +48,7 @@ export default function Modal({
             value={state.lastName}
             onChange={handleFieldChange}
             type="text"
-            name="last_name"
+            name="lastName"
             id="last_name"
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           />
