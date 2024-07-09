@@ -26,6 +26,12 @@ const reducer = (state, action) => {
       return { ...state, [action.field]: action.value };
     case "HANDLE_EDIT":
       return { ...state, isToggleModal: true };
+    case "HANDLE_DELETE":
+      const idx = action.index;
+      return {
+        ...state,
+        submittedData: state.submittedData.filter((_, index) => index !== idx),
+      };
     case "HANDLE_CANCEL":
       return { ...state, isToggleModal: false };
 
@@ -51,6 +57,9 @@ export default function EmployeeList() {
     dispatch({ type: "HANDLE_FIELD_CHANGE", field: name, value: value });
   };
 
+  const handleDelete = (index) => {
+    dispatch({ type: "HANDLE_DELETE", index });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch({ type: "HANDLE_SUBMIT" });
@@ -74,7 +83,13 @@ export default function EmployeeList() {
           </thead>
           <tbody>
             {state.submittedData.map((item, index) => (
-              <EmployeeItem key={index} employee={item} dispatch={dispatch} />
+              <EmployeeItem
+                key={index}
+                employee={item}
+                dispatch={dispatch}
+                index={index}
+                handleDelete={handleDelete}
+              />
             ))}
           </tbody>
         </table>

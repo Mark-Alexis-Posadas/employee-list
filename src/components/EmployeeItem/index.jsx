@@ -1,7 +1,12 @@
 import { faPencilAlt, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function EmployeeItem({ dispatch, employee }) {
+export default function EmployeeItem({
+  dispatch,
+  employee,
+  handleDelete,
+  index,
+}) {
   return (
     <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
       <th
@@ -23,7 +28,10 @@ export default function EmployeeItem({ dispatch, employee }) {
             Edit
             <FontAwesomeIcon icon={faPencilAlt} />
           </button>
-          <button className="flex items-center gap-2 font-medium text-red-600 dark:text-red-500 hover:underline">
+          <button
+            className="flex items-center gap-2 font-medium text-red-600 dark:text-red-500 hover:underline"
+            onClick={() => handleDelete(index)}
+          >
             Delete
             <FontAwesomeIcon icon={faTrashAlt} />
           </button>
