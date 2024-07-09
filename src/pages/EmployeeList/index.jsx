@@ -1,7 +1,8 @@
-import TableHeader from "../../components/EmployeeItem/TableHeader";
+import TableHeader from "../../components/TableHeader";
 import EmployeeItem from "../../components/EmployeeItem";
 
 import { TABLE_HEADER_TEXT } from "../../data";
+import Modal from "../../components/Modal/Modal";
 export default function EmployeeList() {
   return (
     <div className="p-10">
@@ -20,6 +21,7 @@ export default function EmployeeList() {
           </tbody>
         </table>
       </div>
+      <Modal />
     </div>
   );
 }
