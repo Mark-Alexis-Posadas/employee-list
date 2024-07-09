@@ -1,4 +1,6 @@
+import TableHeader from "../../components/EmployeeItem/TableHeader";
 import EmployeeItem from "../../components/EmployeeItem";
+
 import { TABLE_HEADER_TEXT } from "../../data";
 export default function EmployeeList() {
   return (
@@ -10,11 +12,7 @@ export default function EmployeeList() {
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              {TABLE_HEADER_TEXT.map((item) => (
-                <th scope="col" className="px-6 py-3" key={item.id}>
-                  {item.name}
-                </th>
-              ))}
+              <TableHeader tableHeaderText={TABLE_HEADER_TEXT} />
             </tr>
           </thead>
           <tbody>
