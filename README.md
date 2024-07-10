@@ -18,7 +18,7 @@ This project implements a simple Employee Management System where users can add,
 - **Tailwind CSS**: Utility-first CSS framework used for styling.
 - **Font Awesome**: Icon toolkit used for icons in the user interface.
 - **uuid**: Library used for generating unique identifiers.
-- **Local Storage API**: Used to persist employee data locally within the browser.
+- **Local Storage API**: Employee data is stored locally, allowing the application to maintain state across page refreshes. Dark and light mode options enhance user customization and accessibility.
 
 ## Installation
 
@@ -27,7 +27,7 @@ To run the project locally:
 1. Clone the repository:
 
    ```bash
-   git clone <https://github.com/Mark-Alexis-Posadas/employee-list>
+   git clone https://github.com/Mark-Alexis-Posadas/employee-list
    ```
 
 2. Navigate into the project directory:
