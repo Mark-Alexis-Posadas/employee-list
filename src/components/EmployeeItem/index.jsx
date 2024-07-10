@@ -22,14 +22,14 @@ export default function EmployeeItem({
       <td className="px-6 py-4">
         <div className="flex items-center gap-3">
           <button
-            className="flex items-center gap-2 font-medium text-blue-600 dark:text-blue-500 hover:underline"
+            className="flex items-center gap-2 font-medium text-blue-600 dark:text-blue-500"
             onClick={() => dispatch({ type: "HANDLE_EDIT", index: index })}
           >
             Edit
             <FontAwesomeIcon icon={faPencilAlt} />
           </button>
           <button
-            className="flex items-center gap-2 font-medium text-red-600 dark:text-red-500 hover:underline"
+            className="flex items-center gap-2 font-medium text-red-600 dark:text-red-500"
             onClick={() => handleDelete(index)}
           >
             Delete

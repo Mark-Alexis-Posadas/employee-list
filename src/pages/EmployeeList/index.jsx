@@ -6,6 +6,7 @@ import Modal from "../../components/Modal/Modal";
 import { useReducer } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faPlusCircle, faSun } from "@fortawesome/free-solid-svg-icons";
+import ConfirmationModal from "../../components/Modal/ConfirmationModal";
 
 //initial state
 const initialState = {
@@ -159,6 +160,7 @@ export default function EmployeeList() {
           isEditing={state.isEditing}
         />
       )}
+      <ConfirmationModal />
     </div>
   );
 }
