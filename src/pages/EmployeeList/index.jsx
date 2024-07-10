@@ -5,7 +5,7 @@ import { TABLE_HEADER_TEXT } from "../../data";
 import Modal from "../../components/Modal/Modal";
 import { useReducer } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faMoon, faPlusCircle, faSun } from "@fortawesome/free-solid-svg-icons";
 
 //initial state
 const initialState = {
@@ -104,14 +104,20 @@ export default function EmployeeList() {
   };
 
   return (
-    <div className="p-10 bg-black min-h-screen overflow-hidden">
-      <button
-        className="text-gray-400 p-2 rounded bg-gray-800 mb-5 flex items-center gap-3"
-        onClick={() => dispatch({ type: "HANDLE_ADD_EMPLOYEE" })}
-      >
-        Add employee
-        <FontAwesomeIcon icon={faPlusCircle} />
-      </button>
+    <div className="p-10 bg-slate-50 dark:bg-black min-h-screen overflow-hidden">
+      <div className="flex items-center justify-between">
+        <button
+          className="dark:text-gray-400 p-2 rounded bg-blue-600 text-white dark:bg-gray-800 mb-5 flex items-center gap-3"
+          onClick={() => dispatch({ type: "HANDLE_ADD_EMPLOYEE" })}
+        >
+          Add employee
+          <FontAwesomeIcon icon={faPlusCircle} />
+        </button>
+        <FontAwesomeIcon
+          icon={faMoon}
+          className="text-yellow-400 text-2xl cursor-pointer"
+        />
+      </div>
       <div className="relative overflow-x-auto shadow-md">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
