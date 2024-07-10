@@ -16,6 +16,7 @@ const initialState = {
   isToggleModal: false,
   submittedData: [],
   editIndex: null,
+  isEditing: false,
 };
 
 //reducer function
@@ -28,7 +29,6 @@ const reducer = (state, action) => {
     case "HANDLE_EDIT":
       const editIdx = action.index;
       const editedData = state.submittedData[editIdx];
-      console.log(editIdx, editedData);
       return {
         ...state,
         isToggleModal: true,
@@ -37,6 +37,7 @@ const reducer = (state, action) => {
         lastName: editedData.lastName,
         email: editedData.email,
         editIndex: editIdx,
+        isEditing: true,
       };
     case "HANDLE_DELETE":
       const idx = action.index;
@@ -48,15 +49,32 @@ const reducer = (state, action) => {
       return { ...state, isToggleModal: false };
 
     case "HANDLE_SUBMIT":
-      return {
-        ...state,
-        submittedData: [...state.submittedData, { ...state }],
-        firstName: "",
-        middleName: "",
-        lastName: "",
-        email: "",
-        isToggleModal: false,
-      };
+      if (state.editIndex !== null) {
+        const submittedData = [...state.submittedData];
+        submittedData[state.editIndex] = { ...state };
+        return {
+          ...state,
+          submittedData,
+          firstName: "",
+          middleName: "",
+          lastName: "",
+          email: "",
+          editIndex: null,
+          isToggleModal: false,
+        };
+      } else {
+        return {
+          ...state,
+          submittedData: [...state.submittedData, { ...state }],
+          firstName: "",
+          middleName: "",
+          lastName: "",
+          email: "",
+          isToggleModal: false,
+        };
+      }
+    default:
+      return state;
   }
 };
 
@@ -73,6 +91,15 @@ export default function EmployeeList() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (
+      !state.firstName.trim() ||
+      !state.middleName.trim() ||
+      !state.lastName.trim() ||
+      !state.email.trim() === ""
+    ) {
+      alert("please add text");
+      return;
+    }
     dispatch({ type: "HANDLE_SUBMIT" });
   };
 
@@ -112,6 +139,7 @@ export default function EmployeeList() {
           handleFieldChange={handleFieldChange}
           handleSubmit={handleSubmit}
           state={state}
+          isEditing={state.isEditing}
         />
       )}
     </div>

@@ -5,11 +5,14 @@ export default function Modal({
   handleFieldChange,
   state,
   handleSubmit,
+  isEditing,
 }) {
   return (
     <div className="flex items-center justify-center fixed w-full top-0 left-0 min-h-screen bg-[rgba(0,0,0,0.4)]">
       <form className="bg-gray-700 p-10 w-[900px]" onSubmit={handleSubmit}>
-        <h1 className="font-bold text-white text-4xl mb-5">Add fields</h1>
+        <h1 className="font-bold text-white text-4xl mb-5">
+          {isEditing ? "Edit Fields" : "Add fields"}
+        </h1>
         <div className="relative z-0 w-full mb-5 group">
           <input
             value={state.firstName}
