@@ -17,6 +17,8 @@ const initialState = {
   submittedData: [],
   editIndex: null,
   isEditing: false,
+
+  isToggleTheme: false,
 };
 
 //reducer function
@@ -73,6 +75,9 @@ const reducer = (state, action) => {
           isToggleModal: false,
         };
       }
+
+    case "TOGGLE_THEME":
+      return { ...state, isToggleTheme: !state.isToggleTheme };
     default:
       return state;
   }
@@ -81,6 +86,10 @@ const reducer = (state, action) => {
 export default function EmployeeList() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const handleToggleTheme = () => {
+    dispatch({ type: "TOGGLE_THEME" });
+    document.body.classList.toggle("dark");
+  };
   const handleFieldChange = (e) => {
     const { name, value } = e.target;
     dispatch({ type: "HANDLE_FIELD_CHANGE", field: name, value: value });
@@ -113,10 +122,12 @@ export default function EmployeeList() {
           Add employee
           <FontAwesomeIcon icon={faPlusCircle} />
         </button>
-        <FontAwesomeIcon
-          icon={faMoon}
-          className="text-yellow-400 text-2xl cursor-pointer"
-        />
+        <button onClick={handleToggleTheme}>
+          <FontAwesomeIcon
+            icon={state.isToggleTheme ? faSun : faMoon}
+            className="text-yellow-400 text-2xl cursor-pointer"
+          />
+        </button>
       </div>
       <div className="relative overflow-x-auto shadow-md">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
