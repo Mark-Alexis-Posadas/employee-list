@@ -33,6 +33,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         [action.field]: action.value,
+        isToggleExist: false,
       };
 
     case "HANDLE_EMAIL_EXIST":
@@ -138,10 +139,12 @@ export default function EmployeeList() {
   const handleDelete = (index) => {
     dispatch({ type: "HANDLE_DELETE", index });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const emailExists = state.submittedData.some(
-      (item) => item.email === state.email
+      (item, index) => item.email === state.email && index !== state.editIndex
     );
 
     if (emailExists) {
