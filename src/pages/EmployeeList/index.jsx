@@ -17,6 +17,7 @@ const initialState = {
   submittedData: [],
   editIndex: null,
 
+  isExist: false,
   isEditing: false,
   isToggleModal: false,
   isToggleTheme: false,
@@ -51,7 +52,11 @@ const reducer = (state, action) => {
         isToggleConfirmationModal: true,
       };
     case "HANDLE_CANCEL":
-      return { ...state, isToggleModal: false };
+      return {
+        ...state,
+        isToggleModal: false,
+        isToggleConfirmationModal: false,
+      };
 
     case "HANDLE_SUBMIT":
       if (state.editIndex !== null) {
@@ -160,9 +165,12 @@ export default function EmployeeList() {
           handleSubmit={handleSubmit}
           state={state}
           isEditing={state.isEditing}
+          isExist={state.isExist}
         />
       )}
-      {state.isToggleConfirmationModal && <ConfirmationModal />}
+      {state.isToggleConfirmationModal && (
+        <ConfirmationModal dispatch={dispatch} />
+      )}
     </div>
   );
 }
