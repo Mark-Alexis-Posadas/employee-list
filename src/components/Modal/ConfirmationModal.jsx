@@ -9,10 +9,12 @@ export default function ConfirmationModal({ dispatch }) {
           icon={faExclamationCircle}
           className="text-red-600 text-8xl"
         />
-        <h1 className="mt-10 text-xl font-bold">
+        <h1 className="mt-10 text-xl font-bold text-black dark:text-white">
           Are you sure to delete this motherfucking item?
         </h1>
-        <p className="my-5">You won't be able to revert this!</p>
+        <p className="my-5 text-black dark:text-white">
+          You won't be able to revert this!
+        </p>
         <div className="flex items-center justify-center gap-3">
           <button
             className="text-white p-2 rounded bg-blue-500"
