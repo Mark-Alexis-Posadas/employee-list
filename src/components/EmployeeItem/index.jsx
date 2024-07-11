@@ -7,6 +7,9 @@ export default function EmployeeItem({
   handleDelete,
   index,
 }) {
+  const onDelete = () => {
+    handleDelete(index);
+  };
   return (
     <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
       <th
@@ -30,7 +33,7 @@ export default function EmployeeItem({
           </button>
           <button
             className="flex items-center gap-2 font-medium text-red-600 dark:text-red-500"
-            onClick={() => handleDelete(index)}
+            onClick={onDelete}
           >
             Delete
             <FontAwesomeIcon icon={faTrashAlt} />

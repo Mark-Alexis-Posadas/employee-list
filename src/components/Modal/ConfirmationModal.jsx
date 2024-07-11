@@ -20,7 +20,12 @@ export default function ConfirmationModal({ dispatch }) {
           >
             Cancel
           </button>
-          <button className="text-white p-2 rounded bg-red-500">Proceed</button>
+          <button
+            className="text-white p-2 rounded bg-red-500"
+            onClick={() => dispatch({ type: "HANDLE_PROCEED_DELETE" })}
+          >
+            Proceed
+          </button>
         </div>
       </div>
     </div>

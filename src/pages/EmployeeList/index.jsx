@@ -54,11 +54,20 @@ const reducer = (state, action) => {
         isEditing: true,
       };
     case "HANDLE_DELETE":
-      const idx = action.index;
       return {
         ...state,
-        // submittedData: state.submittedData.filter((_, index) => index !== idx),
         isToggleConfirmationModal: true,
+        editIndex: action.index,
+      };
+    case "HANDLE_PROCEED_DELETE":
+      const updatedData = state.submittedData.filter(
+        (_, index) => index !== state.editIndex
+      );
+      return {
+        ...state,
+        submittedData: updatedData,
+        isToggleConfirmationModal: false,
+        editIndex: null,
       };
     case "HANDLE_CANCEL":
       return {
