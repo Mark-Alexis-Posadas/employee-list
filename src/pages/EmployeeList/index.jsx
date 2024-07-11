@@ -3,7 +3,7 @@ import EmployeeItem from "../../components/EmployeeItem";
 
 import { TABLE_HEADER_TEXT } from "../../data";
 import Modal from "../../components/Modal/Modal";
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faPlusCircle, faSun } from "@fortawesome/free-solid-svg-icons";
 import ConfirmationModal from "../../components/Modal/ConfirmationModal";
@@ -16,11 +16,10 @@ const initialState = {
   email: "",
   submittedData: [],
   editIndex: null,
-
   isToggleExist: false,
   isEditing: false,
   isToggleModal: false,
-  isToggleTheme: false,
+  isToggleTheme: JSON.parse(localStorage.getItem("isToggleTheme")) || false, // Initialize from localStorage
   isToggleConfirmationModal: false,
 };
 
@@ -76,6 +75,8 @@ const reducer = (state, action) => {
         isToggleModal: false,
         isToggleConfirmationModal: false,
       };
+    case "HANDLE_SAVE_DATA":
+      return { ...state, submittedData: action.payload };
 
     case "HANDLE_SUBMIT":
       if (state.editIndex !== null) {
@@ -113,10 +114,33 @@ const reducer = (state, action) => {
 export default function EmployeeList() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem("isToggleTheme"));
+    if (storedData) {
+      dispatch({ type: "TOGGLE_THEME" });
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("isToggleTheme", JSON.stringify(state.isToggleTheme));
+  }, [state.isToggleTheme]);
+
+  useEffect(() => {
+    const storedTheme = JSON.parse(localStorage.getItem("isToggleTheme"));
+    if (storedTheme) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, []);
+
   const handleToggleTheme = () => {
+    const newThemeState = !state.isToggleTheme;
     dispatch({ type: "TOGGLE_THEME" });
-    document.body.classList.toggle("dark");
+    localStorage.setItem("isToggleTheme", JSON.stringify(newThemeState)); // Update localStorage immediately
+    document.body.classList.toggle("dark", newThemeState); // Toggle dark class on body
   };
+
   const handleFieldChange = (e) => {
     const { name, value } = e.target;
 
