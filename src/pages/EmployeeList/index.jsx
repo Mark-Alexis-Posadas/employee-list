@@ -17,7 +17,7 @@ const initialState = {
   submittedData: [],
   editIndex: null,
 
-  isExist: false,
+  isToggleExist: false,
   isEditing: false,
   isToggleModal: false,
   isToggleTheme: false,
@@ -30,7 +30,16 @@ const reducer = (state, action) => {
     case "HANDLE_ADD_EMPLOYEE":
       return { ...state, isToggleModal: true };
     case "HANDLE_FIELD_CHANGE":
-      return { ...state, [action.field]: action.value };
+      return {
+        ...state,
+        [action.field]: action.value,
+      };
+
+    case "HANDLE_EMAIL_EXIST":
+      return {
+        ...state,
+        isToggleExist: true,
+      };
     case "HANDLE_EDIT":
       const editIdx = action.index;
       const editedData = state.submittedData[editIdx];
@@ -100,7 +109,21 @@ export default function EmployeeList() {
   };
   const handleFieldChange = (e) => {
     const { name, value } = e.target;
-    dispatch({ type: "HANDLE_FIELD_CHANGE", field: name, value: value });
+
+    if (name === "email") {
+      dispatch({
+        type: "HANDLE_FIELD_CHANGE",
+        field: name,
+        value: value,
+        isToggleExist: false,
+      });
+    } else {
+      dispatch({
+        type: "HANDLE_FIELD_CHANGE",
+        field: name,
+        value: value,
+      });
+    }
   };
 
   const handleDelete = (index) => {
@@ -108,6 +131,15 @@ export default function EmployeeList() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    const emailExists = state.submittedData.some(
+      (item) => item.email === state.email
+    );
+
+    if (emailExists) {
+      dispatch({ type: "HANDLE_EMAIL_EXIST" });
+      return;
+    }
+
     if (
       !state.firstName.trim() ||
       !state.middleName.trim() ||
@@ -165,7 +197,8 @@ export default function EmployeeList() {
           handleSubmit={handleSubmit}
           state={state}
           isEditing={state.isEditing}
-          isExist={state.isExist}
+          isToggleExist={state.isToggleExist}
+          email={state.email}
         />
       )}
       {state.isToggleConfirmationModal && (

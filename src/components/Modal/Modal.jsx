@@ -6,7 +6,8 @@ export default function Modal({
   state,
   handleSubmit,
   isEditing,
-  isExist,
+  isToggleExist,
+  email,
 }) {
   return (
     <div className="flex items-center justify-center fixed w-full top-0 left-0 min-h-screen bg-[rgba(0,0,0,0.4)]">
@@ -17,7 +18,9 @@ export default function Modal({
         <h1 className="font-bold dark:text-white text-gray-700 text-4xl mb-5">
           {isEditing ? "Edit Fields" : "Add fields"}
         </h1>
-        {isExist && <p className="text-red-600 text-xl mb-5">Already Exist</p>}
+        {isToggleExist && (
+          <p className="text-red-600 text-xl mb-5">{email} Already exist!</p>
+        )}
         <div className="relative z-0 w-full mb-5 group">
           <label className="text-gray-400" htmlFor="first_name">
             First name
