@@ -14,12 +14,13 @@ const initialState = {
   middleName: "",
   lastName: "",
   email: "",
-  isToggleModal: false,
   submittedData: [],
   editIndex: null,
-  isEditing: false,
 
+  isEditing: false,
+  isToggleModal: false,
   isToggleTheme: false,
+  isToggleConfirmationModal: false,
 };
 
 //reducer function
@@ -46,7 +47,8 @@ const reducer = (state, action) => {
       const idx = action.index;
       return {
         ...state,
-        submittedData: state.submittedData.filter((_, index) => index !== idx),
+        // submittedData: state.submittedData.filter((_, index) => index !== idx),
+        isToggleConfirmationModal: true,
       };
     case "HANDLE_CANCEL":
       return { ...state, isToggleModal: false };
@@ -160,7 +162,7 @@ export default function EmployeeList() {
           isEditing={state.isEditing}
         />
       )}
-      <ConfirmationModal />
+      {state.isToggleConfirmationModal && <ConfirmationModal />}
     </div>
   );
 }

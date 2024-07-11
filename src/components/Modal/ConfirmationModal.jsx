@@ -10,7 +10,7 @@ export default function ConfirmationModal() {
           className="text-red-600 text-8xl"
         />
         <h1 className="mt-10 text-xl font-bold">
-          Are you sure to do something?
+          Are you sure to delete this motherfucking item?
         </h1>
         <p className="my-5">You won't be able to revert this!</p>
         <div className="flex items-center justify-center gap-3">
