@@ -75,6 +75,7 @@ const reducer = (state, action) => {
         ...state,
         isToggleModal: false,
         isToggleConfirmationModal: false,
+        editIndex: null,
       };
     case "HANDLE_SAVE_DATA":
       return { ...state, submittedData: action.payload };
@@ -219,6 +220,7 @@ export default function EmployeeList() {
             {state.submittedData.map((item, index) => (
               <EmployeeItem
                 key={index}
+                editIndex={state.editIndex}
                 employee={item}
                 dispatch={dispatch}
                 index={index}
