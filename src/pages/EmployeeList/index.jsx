@@ -192,7 +192,7 @@ export default function EmployeeList() {
   };
 
   return (
-    <div className="p-10 bg-slate-50 dark:bg-black min-h-screen overflow-hidden">
+    <div className="p-5 md:p-10 bg-slate-50 dark:bg-black min-h-screen overflow-hidden">
       <div className="flex items-center justify-between">
         <button
           className="dark:text-gray-400 p-2 rounded bg-blue-600 text-white dark:bg-gray-800 mb-5 flex items-center gap-3"
