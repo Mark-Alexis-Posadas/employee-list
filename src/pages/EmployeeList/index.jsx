@@ -14,7 +14,8 @@ const initialState = {
   middleName: "",
   lastName: "",
   email: "",
-  submittedData: [],
+  submittedData: JSON.parse(localStorage.getItem("submittedData")) || [],
+
   editIndex: null,
   isToggleExist: false,
   isEditing: false,
@@ -123,10 +124,12 @@ export default function EmployeeList() {
 
   useEffect(() => {
     localStorage.setItem("isToggleTheme", JSON.stringify(state.isToggleTheme));
-  }, [state.isToggleTheme]);
+    localStorage.setItem("submittedData", JSON.stringify(state.submittedData));
+  }, [state.isToggleTheme, state.submittedData]);
 
   useEffect(() => {
     const storedTheme = JSON.parse(localStorage.getItem("isToggleTheme"));
+
     if (storedTheme) {
       document.body.classList.add("dark");
     } else {
@@ -137,8 +140,8 @@ export default function EmployeeList() {
   const handleToggleTheme = () => {
     const newThemeState = !state.isToggleTheme;
     dispatch({ type: "TOGGLE_THEME" });
-    localStorage.setItem("isToggleTheme", JSON.stringify(newThemeState)); // Update localStorage immediately
-    document.body.classList.toggle("dark", newThemeState); // Toggle dark class on body
+    localStorage.setItem("isToggleTheme", JSON.stringify(newThemeState));
+    document.body.classList.toggle("dark", newThemeState);
   };
 
   const handleFieldChange = (e) => {
